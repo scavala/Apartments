@@ -14,6 +14,7 @@ namespace Apartments.Controllers
     {
         private ModelContainer db = new ModelContainer();
 
+
         // GET: People
         public ActionResult Index()
         {
@@ -123,8 +124,7 @@ namespace Apartments.Controllers
             db.People.Remove(person);
             db.SaveChanges();
             return RedirectToAction("Index");
-            //deletefix
-            //remove ap remove slike
+
         }
 
         protected override void Dispose(bool disposing)

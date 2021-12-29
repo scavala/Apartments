@@ -57,7 +57,7 @@ namespace Apartments.Controllers
             {
                 People = db.People
             };
-            
+
             return View(model);
         }
 
@@ -116,7 +116,7 @@ namespace Apartments.Controllers
             {
                 People = db.People,
                 Apartment = apartment,
-                vlasnikID=apartment.vlasnikID
+                vlasnikID = apartment.vlasnikID
 
             };
             return View(model);
@@ -132,8 +132,8 @@ namespace Apartments.Controllers
             UpdateApartment(apartment, apartmentToUpdate);
             string strDDLValue = Request.Form["vlasnikID"].ToString();
             if (!int.TryParse(strDDLValue, out int vlasnikID)) { return RedirectToAction("Index"); }
-                        apartmentToUpdate.vlasnikID = vlasnikID;
-                        if (apartmentToUpdate.UploadedFiles == null)
+            apartmentToUpdate.vlasnikID = vlasnikID;
+            if (apartmentToUpdate.UploadedFiles == null)
             {
                 apartmentToUpdate.UploadedFiles = new List<UploadedFile>();
             }
@@ -157,7 +157,7 @@ namespace Apartments.Controllers
             db.Entry(apartmentToUpdate).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
-         
+
         }
 
         private static void UpdateApartment(Apartment apartment, Apartment apartmentToUpdate)
@@ -173,7 +173,7 @@ namespace Apartments.Controllers
         public ActionResult Delete(int id)
         {
             db.UploadedFiles.RemoveRange(db.UploadedFiles.Where(f => f.ApartmentIDApartment == id));
-            db.Apartments.Remove(db.Apartments.Find(id));           
+            db.Apartments.Remove(db.Apartments.Find(id));
             db.SaveChanges();
             return new HttpStatusCodeResult(HttpStatusCode.OK, "obrisan");
         }

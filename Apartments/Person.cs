@@ -20,7 +20,7 @@ namespace Apartments
         {
             this.Apartments = new HashSet<Apartment>();
         }
-    
+
         public int IDPerson { get; set; }
         [Required]
         [MaxLength(50, ErrorMessage = "First name max length 50 chars")]
@@ -29,11 +29,11 @@ namespace Apartments
         [Required]
         [MaxLength(50, ErrorMessage = "Last anem max length 50 chars")]
         public string LastName { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Apartment> Apartments { get; set; }
 
-        public String Description  => ToString();
+        public String Description => ToString();
 
 
         public override string ToString()

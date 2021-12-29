@@ -20,10 +20,10 @@ namespace Apartments
         {
             this.UploadedFiles = new HashSet<UploadedFile>();
         }
-    
+
         public int IDApartment { get; set; }
         [Required]
-        [MaxLength(50,ErrorMessage ="Address max length 50 chars")]
+        [MaxLength(50, ErrorMessage = "Address max length 50 chars")]
         public string Address { get; set; }
         [Required]
         [MaxLength(20, ErrorMessage = "City max length 20 chars")]
@@ -34,7 +34,7 @@ namespace Apartments
         [Required]
         [Display(Name = "Vlasnik")]
         public int vlasnikID { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UploadedFile> UploadedFiles { get; set; }
         public virtual Person Person { get; set; }

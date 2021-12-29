@@ -11,7 +11,7 @@ namespace Apartments
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class UploadedFile
     {
         public int IDUploadedFile { get; set; }
@@ -19,7 +19,7 @@ namespace Apartments
         public string ContentType { get; set; }
         public byte[] Content { get; set; }
         public int ApartmentIDApartment { get; set; }
-    
+
         public virtual Apartment Apartment { get; set; }
     }
 }
