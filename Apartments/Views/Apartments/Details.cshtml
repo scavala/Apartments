@@ -1,0 +1,69 @@
+﻿@model Apartments.Apartment
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Apartment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IDApartment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDApartment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contact)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vlasnikID)
+        </dt>
+
+        <dd>
+            @Html.Action(controllerName: "People", actionName: "GetNaziv", routeValues: new { id = Model.vlasnikID })
+        </dd>
+
+        @foreach (var uploadedFile in Model.UploadedFiles)
+        {
+            <dt>
+                <strong>@uploadedFile.Name</strong>
+            </dt>
+            <dd style="margin-top:10px">
+                <img src="~/Files?id=@uploadedFile.IDUploadedFile" alt="picture" width="300" height="200" />
+            </dd>
+        }
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.IDApartment}) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Apartments.Apartment>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDApartment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contact)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vlasnikID)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDApartment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contact)
+            </td>
+            <td>
+                @Html.Action(controllerName: "People", actionName: "GetNaziv", routeValues: new { id = item.vlasnikID })
+
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IDApartment },
+               new
+                    {
+                    @class = "btn btn-primary"
+                    }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IDApartment }, new
+                {
+                    @class = "btn btn-primary"
+                      }) |
+
+                @Html.ActionLink(linkText: "Delete", actionName: "Delete", htmlAttributes: new
+                       {
+                      @class = "btn btn-danger",
+                      data_id = item.IDApartment,
+                      data_naziv = item.Address
+                  }, routeValues: new { id = item.IDApartment })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts{
+    <script>
+        $('.btn-danger').on('click', function (e) {
+                        e.preventDefault();
+                    const { id, naziv } = this.dataset;
+            if (confirm(`Jeste li sigurni da želite obrisati stan na adresi ${naziv}?`)) {
+                $.ajax({
+                                        url: '@Url.Action(controllerName:"Apartments",actionName:"Delete")',
+                    data: { id },
+                    statusCode: {
+                        200: function () {
+                            $('.table')
+                                .find(`[data-id=${id}]`)
+                                .parents('tr').hide(500);
+                        },
+                        400: function () {
+                   console.log('Stan nije orbisan!');
+                        }
+                    }
+                });
+            }
+                    })
+    </script>
+}
